@@ -1,5 +1,5 @@
 # Tetris_AI
-[Deuxième version](https://github.com/JonathanOll/Tetris-AI/) d'un programme d'intelligence artificielle pour le jeu du Tetris
+[Deuxième version](https://github.com/JonathanOll/Tetris_AI/) d'un programme d'intelligence artificielle pour le jeu du Tetris
 
 ## Fonctionnement
 
