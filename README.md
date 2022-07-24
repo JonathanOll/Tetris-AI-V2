@@ -1,5 +1,5 @@
 # Tetris_AI
-![image](https://img.shields.io/badge/Language-Python-yellow)
+[![image](https://img.shields.io/badge/Language-Python-yellow)](https://www.python.org/)
 ![image](https://img.shields.io/badge/Library-Pygame-orange)
 ![image](https://img.shields.io/badge/Author-JonathanOll-blue)
 
