@@ -1,7 +1,5 @@
 # Tetris_AI
-Projet de fin d'année terminale générale option Numérique et Sciences Informatiques
-
-![image](https://user-images.githubusercontent.com/70845195/174442513-670f36db-57b1-414a-b7fb-c91b28ea6afa.png)
+[Deuxième version](https://github.com/JonathanOll/Tetris-AI/) d'un programme d'intelligence artificielle pour le jeu du Tetris
 
 ## Fonctionnement
 
