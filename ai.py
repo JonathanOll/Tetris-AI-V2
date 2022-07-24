@@ -196,7 +196,7 @@ class Network:
         for x, y in moving:
         
             piece[y-miny][x-minx] = 1
-        
+
         return piece
 
     def best_score(self, mat, piece):  # get the max score for a certain piece and matrix

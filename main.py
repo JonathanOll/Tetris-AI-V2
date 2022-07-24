@@ -10,6 +10,7 @@ selected = -1
 games = []
 current_gen = 1
 results = [0]
+max_results = [0]
 graph = None
 
 def load_colors():
@@ -67,7 +68,7 @@ def handle_event(event):
       
                 elif e.key == pygame.K_RIGHT:
 
-                    if selected < ROW*COLUMN: selected += 1
+                    if selected < ROW*COLUMN - 1: selected += 1
 
                     
 
@@ -90,6 +91,8 @@ def next_gen(games):
     if len(net) > 0:
         
         globals()["results"].append(sum(n.fitness for n in net) / len(net))
+
+        globals()["max_results"].append(max(n.fitness for n in net))
 
     net.sort(key=lambda a: - a.fitness)
 
@@ -128,7 +131,7 @@ def next_gen(games):
 
 def draw_centered_string(window, x, y , text, size=15):
 
-    font = pygame.font.SysFont(None, size)
+    font = pygame.font.Font(pygame.font.match_font("calibri"), size)
     img = font.render(str(text), True, (0, 0, 0))
     window.blit(img, (x - img.get_width() / 2, y - img.get_height() / 2))
 
@@ -137,7 +140,13 @@ def update_graph():
 
     fig, ax = plt.subplots(1, 1, figsize=(CANVAS_SIZE[0] / 100, CANVAS_SIZE[1] / 100))
 
-    ax.plot(list(range(len(globals()["results"]))), globals()["results"], color="red")
+    ax.bar(range(len(globals()["max_results"])), globals()["max_results"], color="tab:red", label="max")
+
+    ax.bar(range(len(globals()["results"])), globals()["results"], color="tab:blue", label="average")
+
+    ax.legend()
+
+    # ax.plot(list(range(len(globals()["results"]))), globals()["results"], color="red")
 
     fig.patch.set_facecolor((INTERFACE_COLOR[0] / 255, INTERFACE_COLOR[1] / 255, INTERFACE_COLOR[2] / 255))
     ax.set_facecolor((INTERFACE_COLOR[0] / 255, INTERFACE_COLOR[1] / 255, INTERFACE_COLOR[2] / 255))
@@ -156,25 +165,29 @@ def draw_interface(window):
 
     pygame.draw.rect(window, INTERFACE_COLOR, pygame.Rect(base_x, base_y, width, height))
 
-    draw_centered_string(window, center_x, 70, "CURRENT GEN", 50)
+    draw_centered_string(window, center_x, 70, "Current generation", FONT_SIZE)
 
-    draw_centered_string(window, center_x, 110, current_gen, 50)
+    draw_centered_string(window, center_x, 115, current_gen, FONT_SIZE)
 
     if graph is not None:
         
         img = pygame.image.fromstring(graph, CANVAS_SIZE, "RGB")
 
-        window.blit(img, (center_x - img.get_width() // 2, 165))
+        window.blit(img, (center_x - img.get_width() // 2, 155))
 
-        draw_centered_string(window, center_x, 160, "Performance evolution", 50)
+        draw_centered_string(window, center_x, 160, "Performance evolution", FONT_SIZE)
     
     if selected != -1:
 
         pygame.draw.rect(window, (INTERFACE_COLOR[0] + 20, INTERFACE_COLOR[1] + 20, INTERFACE_COLOR[2] + 20), (center_x - width // 2 + 10, 420, width - 20, 290))
 
-        draw_centered_string(window, center_x, 450, "SCORE", 50)
+        draw_centered_string(window, center_x, 450, "Score", FONT_SIZE)
 
-        draw_centered_string(window, center_x, 490, games[selected].score, 50)
+        draw_centered_string(window, center_x, 490, games[selected].score, FONT_SIZE)
+        
+        draw_centered_string(window, center_x, 530, "Completed lines", FONT_SIZE)
+
+        draw_centered_string(window, center_x, 570, games[selected].completed_lines, FONT_SIZE)
 
     pygame.display.flip()
 
@@ -335,6 +348,7 @@ class Game:
         self.running = True
 
         self.score = 0
+        self.completed_lines = 0
     
     def is_pos_valid(self, x, y):
 
@@ -516,6 +530,7 @@ class Game:
                     self.matrix.insert(0, [0] * len(self.matrix[0]))
 
         self.score += [0, 100, 300, 500, 800][completed_lines_count]
+        self.completed_lines += completed_lines_count
 
         # SPAWN PIECE IF NEEDED
 
