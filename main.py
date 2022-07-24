@@ -4,17 +4,7 @@ import sys
 from random import randint, choice
 import ai
 import matplotlib.pyplot as plt
-
-
-CPU_THREAD = 8
-
-SPEED = 100
-SIZE = 10
-SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
-COLORS = []
-COLUMN, ROW = 8, 4
-CANVAS_SIZE = (400, 250)
-INTERFACE_COLOR = (100, 100, 100)
+from parameters import *
 
 selected = -1
 games = []
@@ -130,7 +120,7 @@ def next_gen(games):
             res.append(Game(Controller()))
     
     globals()["current_gen"] += 1
-    globals()["selected"] = 0
+    globals()["selected"] = -1
     
     update_graph()
     
@@ -147,7 +137,7 @@ def update_graph():
 
     fig, ax = plt.subplots(1, 1, figsize=(CANVAS_SIZE[0] / 100, CANVAS_SIZE[1] / 100))
 
-    ax.plot(list(range(len(globals()["results"]))), globals()["results"], color="black")
+    ax.plot(list(range(len(globals()["results"]))), globals()["results"], color="red")
 
     fig.patch.set_facecolor((INTERFACE_COLOR[0] / 255, INTERFACE_COLOR[1] / 255, INTERFACE_COLOR[2] / 255))
     ax.set_facecolor((INTERFACE_COLOR[0] / 255, INTERFACE_COLOR[1] / 255, INTERFACE_COLOR[2] / 255))
@@ -540,6 +530,9 @@ class Game:
         
         pygame.display.flip()
 
+    def run(self):
+        while True:
+            self.tick()
 
 if __name__ == "__main__":
 

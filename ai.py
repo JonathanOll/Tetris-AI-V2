@@ -223,7 +223,7 @@ class Network:
         
         return max_score
 
-    def best_move(self, mat, moving, next_piece=[]):  # pour obtenir la rotation et la position optimales
+    def best_move(self, mat, moving):  # pour obtenir la rotation et la position optimales
         
         if moving == []: return 0, 0
         
