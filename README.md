@@ -1,4 +1,8 @@
 # Tetris_AI
+[![image](https://img.shields.io/badge/Language-Python-yellow)](https://www.python.org/)
+[![image](https://img.shields.io/badge/Library-Pygame-orange)](https://www.pygame.org/)
+[![image](https://img.shields.io/badge/Author-JonathanOll-blue)](https://github.com/JonathanOll/)
+
 [Deuxième version](https://github.com/JonathanOll/Tetris_AI/) d'un programme d'intelligence artificielle pour le jeu du Tetris
 
 ## Fonctionnement
@@ -9,7 +13,7 @@ Une intelligence artificielle capable de jouer au Tetris toute seule, fonctionna
 
 ## Performances
 
-![image](https://user-images.githubusercontent.com/70845195/177747996-590c1c2f-5bb2-4426-9e77-a75c64c8cf8b.png)
+![image](https://user-images.githubusercontent.com/70845195/180662276-fc2e53f3-132e-4106-ac89-6bd7fac34a7b.png)
 
 ## Installation
 
