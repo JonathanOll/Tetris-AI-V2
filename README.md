@@ -13,7 +13,7 @@ Une intelligence artificielle capable de jouer au Tetris toute seule, fonctionna
 
 ## Performances
 
-![image](https://user-images.githubusercontent.com/70845195/177747996-590c1c2f-5bb2-4426-9e77-a75c64c8cf8b.png)
+![image](https://user-images.githubusercontent.com/70845195/180662266-f2435cc7-dfb2-4713-bcfc-acf9e7827554.png)
 
 ## Installation
 
