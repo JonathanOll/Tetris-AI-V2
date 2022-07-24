@@ -1,8 +1,7 @@
 # Tetris_AI
-[![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
-[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
-[![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
-
+[image](https://img.shields.io/badge/Language-Python-yellow)
+[image](https://img.shields.io/badge/Library-Pygame-orange)
+[image](https://img.shields.io/badge/Authir-JonathanOll-blue)
 
 [Deuxième version](https://github.com/JonathanOll/Tetris_AI/) d'un programme d'intelligence artificielle pour le jeu du Tetris
 
