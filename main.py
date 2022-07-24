@@ -232,6 +232,8 @@ class Controller:
     def __init__(self, network=None):
         
         self.network = network
+        self.pointed_x = -1
+        self.pointed_rot = -1
         self.game = None
 
         self.left = False
@@ -259,22 +261,26 @@ class Controller:
 
             current_x = min(self.game.moving, key=lambda a: a[0])[0]
 
-            x, rot = self.network.best_move(self.game.matrix, self.game.moving)
+            if self.pointed_rot == -1 or self.pointed_x == -1 or min(self.game.moving, key=lambda a: a[1])[1] <= 3:
+                
+                self.pointed_x, self.pointed_rot = self.network.best_move(self.game.matrix, self.game.moving)
 
-            if rot > 0:
+            if self.pointed_rot > 0:
 
                 self.up = True
+
+                self.pointed_rot -= 1
 
             else:
 
                 self.up = False
 
-            if current_x > x:
+            if current_x > self.pointed_x:
                 
                 self.left = True
                 self.right = False
 
-            elif current_x < x:
+            elif current_x < self.pointed_x:
 
                 self.left = False                
                 self.right = True
@@ -284,13 +290,19 @@ class Controller:
                 self.left = False
                 self.right = False
 
-            if current_x == x and rot == 0:
+            if current_x == self.pointed_x and self.pointed_rot == 0:
 
                 self.down = True
 
             else:
 
-                self.down = False          
+                self.down = False       
+
+    def reset(self):
+
+        self.pointed_rot = -1
+
+        self.pointed_x = -1   
     
 class Game:
 
@@ -398,6 +410,7 @@ class Game:
 
                 if not self.is_pos_valid(x, y+1) or (self.matrix[y+1][x] != 0 and (x, y+1) not in self.moving):
                     apply_gravity = False
+                    break
             
             if apply_gravity:
 
@@ -436,6 +449,7 @@ class Game:
                 if not self.is_pos_valid(new_x, new_y) or (self.matrix[new_y][new_x] != 0 and (new_x, new_y) not in self.moving):
                 
                    apply_rotation = False
+                   break
 
             if apply_rotation:
 
@@ -463,6 +477,7 @@ class Game:
                 if not self.is_pos_valid(x + movement, y) or (self.matrix[y][x + movement] != 0 and (x + movement, y) not in self.moving):
                     
                     apply_movement = False
+                    break
             
             if apply_movement:
 
@@ -480,22 +495,25 @@ class Game:
 
         completed_lines_count = 0
 
-        for y in range(len(self.matrix)):
-            
-            line_completed = True
+        if self.moving == []:
 
-            for x in range(len(self.matrix[y])):
+            for y in range(len(self.matrix)):
+                
+                line_completed = True
 
-                if self.matrix[y][x] == 0 or (x, y) in self.moving:
+                for x in range(len(self.matrix[y])):
 
-                    line_completed = False
-            
-            if line_completed:
+                    if self.matrix[y][x] == 0 or (x, y) in self.moving:
 
-                self.matrix.pop(y)
-                completed_lines_count += 1
+                        line_completed = False
+                        break
+                
+                if line_completed:
 
-                self.matrix.insert(0, [0] * len(self.matrix[0]))
+                    self.matrix.pop(y)
+                    completed_lines_count += 1
+
+                    self.matrix.insert(0, [0] * len(self.matrix[0]))
 
         self.score += [0, 100, 300, 500, 800][completed_lines_count]
 
@@ -505,7 +523,6 @@ class Game:
 
             piece = choice(Game.PIECES)
 
-
             if self.can_place(len(self.matrix[0]) // 2 - len(piece[0]) // 2, 0, piece):
 
                 self.place(len(self.matrix[0]) // 2 - len(piece[0]) // 2, 0, piece, randint(1, len(COLORS) - 1))
@@ -513,6 +530,8 @@ class Game:
             else:
 
                 self.terminate()
+        
+            self.controller.reset()
 
     def paint(self, screen, x_base, y_base, background_diff, infos=False):
         

@@ -2,7 +2,7 @@ from copy import deepcopy
 from random import randint, uniform
 
 
-def height_difference(m, moving):  # somme des différences de hauteur entre chaque colonnes
+def height_difference(m, moving):  # sum of height difference between each pair of column
     
     lst = []
     
@@ -28,7 +28,7 @@ def height_difference(m, moving):  # somme des différences de hauteur entre cha
     return res
 
 
-def max_height(m, moving):  # hauteur maximale du jeu
+def max_height(m, moving):
     
     res = 0
     
@@ -43,7 +43,7 @@ def max_height(m, moving):  # hauteur maximale du jeu
     return res
 
 
-def completed_line(m, moving):  # nombre de lignes complétées
+def completed_line(m, moving):
     
     res = 0
     
@@ -64,7 +64,7 @@ def completed_line(m, moving):  # nombre de lignes complétées
     return [0, 1, 3, 5, 8][res]
 
 
-def hole_count(m, moving):  # nombre de trous
+def hole_count(m, moving):
 
     res = 0
 
@@ -89,7 +89,7 @@ def hole_count(m, moving):  # nombre de trous
     return res
 
 
-def rotate(piece):  # faire tourner la matrice de la piece
+def rotate(piece):
 
     width, height = len(piece[0]), len(piece)
 
@@ -104,7 +104,7 @@ def rotate(piece):  # faire tourner la matrice de la piece
     return new
 
 
-def place_at_the_lowest(matrix, piece, xx):  # obtenir la matrice de jeu si l'on placait une piece à une certaine position
+def place_at_the_lowest(matrix, piece, xx):  # get game's matrix if a piece was placed at the lowest in a certain position
 
     matrix = deepcopy(matrix)
 
@@ -174,7 +174,7 @@ class Network:
         
         self.fitness = None
 
-    def predict(self, matrix, moving):  # obtenir le score associé à une matrice
+    def predict(self, matrix, moving):  # get score from a game's matrix
         
         res = 0
         
@@ -184,7 +184,7 @@ class Network:
         
         return res
 
-    def get_piece(self, moving):  # récuperer la piece en fonction de la liste moving
+    def get_piece(self, moving):  # isolate moving piece
         
         minx = min(moving, key=lambda a: a[0])[0]
         miny = min(moving, key=lambda a: a[1])[1]
@@ -199,7 +199,7 @@ class Network:
         
         return piece
 
-    def best_score(self, mat, piece):  # pour obtenir le score maximal obtenable en fonction d'une piece
+    def best_score(self, mat, piece):  # get the max score for a certain piece and matrix
         
         matrix = deepcopy(mat)
         
