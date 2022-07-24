@@ -1,7 +1,7 @@
 # Tetris_AI
-[image](https://img.shields.io/badge/Language-Python-yellow)
-[image](https://img.shields.io/badge/Library-Pygame-orange)
-[image](https://img.shields.io/badge/Authir-JonathanOll-blue)
+![image](https://img.shields.io/badge/Language-Python-yellow)
+![image](https://img.shields.io/badge/Library-Pygame-orange)
+![image](https://img.shields.io/badge/Authir-JonathanOll-blue)
 
 [Deuxième version](https://github.com/JonathanOll/Tetris_AI/) d'un programme d'intelligence artificielle pour le jeu du Tetris
 
