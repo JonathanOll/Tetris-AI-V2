@@ -4,7 +4,7 @@ import sys
 from random import randint, choice
 import ai
 import matplotlib.pyplot as plt
-from parameters import *
+from options import *
 
 selected = -1
 games = []
@@ -140,16 +140,17 @@ def update_graph():
 
     fig, ax = plt.subplots(1, 1, figsize=(CANVAS_SIZE[0] / 100, CANVAS_SIZE[1] / 100))
 
-    ax.bar(range(len(globals()["max_results"])), globals()["max_results"], color="tab:red", label="max")
+    ax.plot(range(len(globals()["max_results"])), globals()["max_results"], color="tab:red", label="max")
 
-    ax.bar(range(len(globals()["results"])), globals()["results"], color="tab:blue", label="average")
+    ax.plot(range(len(globals()["results"])), globals()["results"], color="tab:blue", label="average")
 
     ax.legend()
 
     # ax.plot(list(range(len(globals()["results"]))), globals()["results"], color="red")
 
     fig.patch.set_facecolor((INTERFACE_COLOR[0] / 255, INTERFACE_COLOR[1] / 255, INTERFACE_COLOR[2] / 255))
-    ax.set_facecolor((INTERFACE_COLOR[0] / 255, INTERFACE_COLOR[1] / 255, INTERFACE_COLOR[2] / 255))
+    # ax.set_facecolor((INTERFACE_COLOR[0] / 255, INTERFACE_COLOR[1] / 255, INTERFACE_COLOR[2] / 255))
+    ax.set_facecolor((1, 1, 1))
 
     fig.canvas.draw()
 
